@@ -28,7 +28,7 @@ Add the `JsonMultipartOperationTransformer` to your OpenAPI configuration in `Pr
 ```csharp
 builder.Services.AddOpenApi(options =>
 {
-	options.AddOperationTransformer<JsonMultipartOperationTransformer>();
+    options.AddOperationTransformer<JsonMultipartOperationTransformer>();
 });
 ```
 
@@ -38,17 +38,17 @@ builder.Services.AddOpenApi(options =>
 [HttpPost]
 public async Task<IActionResult> UploadData([JsonFormPart] MyDataModel data, [FromForm] FormFile? file)
 {
-	// data is automatically deserialized from the JSON form part
-	// file contains the uploaded file if provided
+    // data is automatically deserialized from the JSON form part
+    // file contains the uploaded file if provided
 
-	return Ok(new { message = "Upload successful", data });
+    return Ok(new { message = "Upload successful", data });
 }
 
 public class MyDataModel
 {
-	public string Name { get; set; }
-	public int Age { get; set; }
-	public string Description { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Description { get; set; }
 }
 ```
 ## Requirements
