@@ -1,0 +1,27 @@
+name: build
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet build Hto3.OpenApi.JsonMultipartFormDataSupport/Hto3.OpenApi.JsonMultipartFormDataSupport.csproj --configuration Release
+  publish:
+    name: Nuget Publish
+    runs-on: windows-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet build -c Release Hto3.OpenApi.JsonMultipartFormDataSupport/Hto3.OpenApi.JsonMultipartFormDataSupport.csproj
+      - run: dotnet pack --no-build -c Release Hto3.OpenApi.JsonMultipartFormDataSupport/Hto3.OpenApi.JsonMultipartFormDataSupport.csproj -o .
+      - run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate -n

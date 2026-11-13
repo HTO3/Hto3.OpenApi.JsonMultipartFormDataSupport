@@ -1,3 +1,10 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/" />
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github/workflows/publish.yml" />
+  </Folder>
   <Project Path="Hto3.OpenApi.JsonMultipartFormDataSupport/Hto3.OpenApi.JsonMultipartFormDataSupport.csproj" />
 </Solution>
