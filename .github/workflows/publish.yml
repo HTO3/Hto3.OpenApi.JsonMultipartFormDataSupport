@@ -16,7 +16,7 @@ jobs:
   publish:
     name: Nuget Publish
     runs-on: windows-latest
-    needs: test
+    needs: build
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-dotnet@v5
