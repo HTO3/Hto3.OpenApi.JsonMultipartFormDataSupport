@@ -3,8 +3,19 @@ using System.Text.Json;
 
 namespace Hto3.OpenApi.JsonMultipartFormDataSupport
 {
+    /// <summary>
+    /// Model binder for deserializing JSON data from multipart/form-data requests.
+    /// </summary>
+    /// <remarks>
+    /// Supports JSON data provided as file uploads or form field values. Uses JSON serialization with web defaults.
+    /// </remarks>
     public class JsonFormPartBinder : IModelBinder
     {
+        /// <summary>
+        /// Asynchronously binds model data from a multipart/form-data request.
+        /// </summary>
+        /// <param name="context">The <see cref="ModelBindingContext"/> containing the HTTP context and model metadata.</param>
+        /// <returns>A task representing the asynchronous binding operation.</returns>
         public async Task BindModelAsync(ModelBindingContext context)
         {
             var request = context.HttpContext.Request;

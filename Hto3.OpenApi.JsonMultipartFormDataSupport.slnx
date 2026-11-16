@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path="nuget-logo-small.png" />
+    <File Path="nuget-logo.kra" />
+    <File Path="nuget-logo.png" />
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Solution Items/.github/" />

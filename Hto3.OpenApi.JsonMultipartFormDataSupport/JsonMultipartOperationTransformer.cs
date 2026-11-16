@@ -5,8 +5,22 @@ using System.Reflection;
 
 namespace Hto3.OpenApi.JsonMultipartFormDataSupport
 {
+    /// <summary>
+    /// OpenAPI operation transformer that generates proper multipart/form-data schema documentation for endpoints using JSON form parts and file uploads.
+    /// </summary>
+    /// <remarks>
+    /// Processes controller action parameters marked with <see cref="JsonFormPartAttribute"/> and those accepting file uploads.
+    /// Sets JSON content-type encoding for JSON parts and generates binary schemas for file uploads.
+    /// </remarks>
     public sealed class JsonMultipartOperationTransformer : IOpenApiOperationTransformer
     {
+        /// <summary>
+        /// Transforms an OpenAPI operation to add proper multipart/form-data documentation.
+        /// </summary>
+        /// <param name="operation">The <see cref="OpenApiOperation"/> to transform.</param>
+        /// <param name="context">The <see cref="OpenApiOperationTransformerContext"/> providing metadata about the operation.</param>
+        /// <param name="cancellationToken">A cancellation token to monitor for cancellation requests.</param>
+        /// <returns>A task representing the asynchronous transformation operation.</returns>
         public async Task TransformAsync(OpenApiOperation operation, OpenApiOperationTransformerContext context, CancellationToken cancellationToken)
         {
             if (context.Description.ActionDescriptor is not ControllerActionDescriptor action)
@@ -21,7 +35,7 @@ namespace Hto3.OpenApi.JsonMultipartFormDataSupport
                 .Where(p => p.IsDefined(typeof(JsonFormPartAttribute), false))
                 .Select(p => p.Name!)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
-            
+
             if (operation.Parameters is not null)
             {
                 var queryParameters = operation.Parameters
@@ -55,6 +69,18 @@ namespace Hto3.OpenApi.JsonMultipartFormDataSupport
                     {
                         Type = JsonSchemaType.String,
                         Format = "binary"
+                    };
+                }
+                else if (parameter.ParameterType == typeof(IFormFileCollection))
+                {
+                    properties[name] = new OpenApiSchema()
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchema()
+                        {
+                            Type = JsonSchemaType.String,
+                            Format = "binary"
+                        }
                     };
                 }
 

@@ -14,6 +14,13 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<IsPackable>true</IsPackable>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<AssemblyVersion>1.0.0.1</AssemblyVersion>
+	<FileVersion>1.0.0.1</FileVersion>
+	<PackageIcon>nuget-logo.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>bin\Release\Hto3.OpenApi.JsonMultipartFormDataSupport.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\nuget-logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

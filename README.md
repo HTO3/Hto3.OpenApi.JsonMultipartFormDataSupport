@@ -1,3 +1,5 @@
+![logo](https://raw.githubusercontent.com/HTO3/Hto3.OpenApi.JsonMultipartFormDataSupport/main/nuget-logo-small.png)
+
 # Hto3.OpenApi.JsonMultipartFormDataSupport
 
 Support JSON Multipart data in OpenAPI with ASP.NET Core.

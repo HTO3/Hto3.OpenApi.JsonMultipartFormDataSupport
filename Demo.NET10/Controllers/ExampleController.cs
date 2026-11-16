@@ -135,33 +135,13 @@ namespace Demo.NET10.Controllers
         }
 
         /// <summary>
-        /// Demonstrates JSON with arrays/collections in multipart form.
-        /// </summary>
-        /// <remarks>
-        /// Send JSON containing collections like arrays or lists.
-        /// </remarks>
-        [HttpPost("json-with-arrays")]
-        public async Task<IActionResult> UploadJsonWithArrays([JsonFormPart] UserData[]? batchData)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(new
-            {
-                message = "JSON with arrays upload successful",
-                itemCount = batchData?.Length ?? 0,
-                data = batchData
-            });
-        }
-
-        /// <summary>
         /// Demonstrates JSON multipart with multiple files.
         /// </summary>
         /// <remarks>
         /// Send metadata JSON along with multiple file uploads.
         /// </remarks>
         [HttpPost("json-with-multiple-files")]
-        public async Task<IActionResult> UploadJsonWithMultipleFiles([JsonFormPart] DocumentMetadata metadata, [FromForm] IFormFileCollection files)
+        public async Task<IActionResult> UploadJsonWithMultipleFiles([JsonFormPart] UserData metadata, [FromForm] IFormFileCollection files)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -205,7 +185,7 @@ namespace Demo.NET10.Controllers
         }
     }
 
-    // Data Models
+    #region Data Models
 
     /// <summary>Basic user data model.</summary>
     public class UserData
@@ -231,16 +211,6 @@ namespace Demo.NET10.Controllers
         public String? Description { get; set; }
         public String? Category { get; set; }
         public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
-    }
-
-    /// <summary>Document metadata.</summary>
-    public class DocumentMetadata
-    {
-        public String? DocumentTitle { get; set; }
-        public String? DocumentType { get; set; }
-        public String? Author { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public List<String>? Tags { get; set; }
     }
 
     /// <summary>Individual data record.</summary>
@@ -269,4 +239,6 @@ namespace Demo.NET10.Controllers
         [Url(ErrorMessage = "Invalid URL")]
         public String? Website { get; set; }
     }
+
+    #endregion
 }
