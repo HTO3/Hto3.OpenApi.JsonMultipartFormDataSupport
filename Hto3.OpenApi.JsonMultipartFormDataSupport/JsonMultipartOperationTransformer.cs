@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Controllers;
+﻿using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace Hto3.OpenApi.JsonMultipartFormDataSupport
 {
@@ -32,7 +28,7 @@ namespace Hto3.OpenApi.JsonMultipartFormDataSupport
                     .Where(p => p.In == ParameterLocation.Query && jsonPartNames.Contains(p.Name!))
                     .ToArray();
 
-                foreach (var queryParameter in operation.Parameters)
+                foreach (var queryParameter in queryParameters)
                     operation.Parameters.Remove(queryParameter);
             }
 

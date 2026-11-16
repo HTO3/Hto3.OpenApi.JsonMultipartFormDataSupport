@@ -6,5 +6,6 @@
   <Folder Name="/Solution Items/.github/workflows/">
     <File Path=".github/workflows/publish.yml" />
   </Folder>
+  <Project Path="Demo.NET10/Demo.NET10.csproj" Id="c23b8bbe-7f20-46cb-b515-b44c0937a536" />
   <Project Path="Hto3.OpenApi.JsonMultipartFormDataSupport/Hto3.OpenApi.JsonMultipartFormDataSupport.csproj" />
 </Solution>
